@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:education/templates/middleAssignment/SessionResults.dart';
 import 'dart:async';
 
+final IntervalsProvider = StateProvider<int?>((ref) => null);
+
 class Showerprocess extends ConsumerStatefulWidget {
   const Showerprocess({super.key});
   @override
@@ -102,6 +104,7 @@ class _ShowerprocessState extends ConsumerState<Showerprocess> {
                     child:
                     ElevatedButton(
                         onPressed: (){
+                          ref.read(IntervalsProvider.notifier).update((state) => NumOfCycles);
                           if (cnt == 0){
                             cnt++;
                             startTimer(NumOfCycles!, 10);

@@ -119,7 +119,7 @@ class _NewshowerState extends ConsumerState<Newshower> {
                       onPressed: (){
                         ref.read(secondsProvider.notifier).update((state) => seconds);
                         ref.read(temperatureProvider.notifier).update((state) => temperature);
-                        // Navigator.pushNamed(context, '/new/SessionOverview');
+
                         showDialog(
                           context: context,
                           builder: (BuildContext context) {

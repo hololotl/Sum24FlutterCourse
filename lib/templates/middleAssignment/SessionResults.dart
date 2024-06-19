@@ -1,33 +1,104 @@
+import 'package:education/templates/middleAssignment/ShowerProcess.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:education/templates/middleAssignment/newShower.dart';
 
-class Results extends StatefulWidget {
+
+class Results extends ConsumerStatefulWidget {
   const Results({super.key});
 
   @override
-  State<Results> createState() => _ResultsState();
+  ConsumerState<Results> createState() => _ResultsState();
 }
 
-class _ResultsState extends State<Results> {
-  int time = 10;
+class _ResultsState extends ConsumerState<Results> {
   @override
   Widget build(BuildContext context) {
+    final temp = ref.read(temperatureProvider) ?? 15;
+    final seconds = ref.read(secondsProvider) ?? 60;
+    final intervals = ref.read(IntervalsProvider) ?? 1;
     return AlertDialog(
       title: const Text('Session Results'),
       content: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children:<Widget> [
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 20.0),
-            child: Text('time'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:<Widget> [
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: Text('time:'),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Text('$seconds'),
+              )
+            ],
           ),
-          Padding(
-              padding: EdgeInsets.symmetric(vertical: 20),
-              child: Text('$time'),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:<Widget> [
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: Text('temperature:'),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Text('$temp'),
+              )
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:<Widget> [
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: Text('Number of intervals:'),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Text('$intervals'),
+              )
+            ],
+          ),
+          // Row(
+          //   children: [
+          //     Padding(
+          //         padding: EdgeInsets.symmetric(vertical: 40.0),
+          //       child: MoodRatingScreen()
+          //     )
+          //   ],
+          // ),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:<Widget> [
+              Padding(
+                padding: EdgeInsets.symmetric(vertical : 10 , horizontal: 20),
+                child:
+                  ElevatedButton(
+                      onPressed: (){
+                        Navigator.pushNamed(context, '/');
+                      },
+                      child: Text('delete')
+                  ),
+              ),
+              Padding(
+                  padding: EdgeInsets.symmetric(vertical : 10, horizontal: 20),
+                  child:
+                    ElevatedButton(
+                        onPressed: (){
+                          Navigator.pushNamed(context, '/');
+                        },
+                        child: Text('save')
+                    ),
+              )
+            ],
           )
         ],
       ),
+
     );
   }
 }
